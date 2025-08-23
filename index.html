@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDN Bangladesh - বাংলাদেশ নিউজ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, #006A4E, #008C5A);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-left: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 32px;
+            color: #FFC107;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 17px;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #FFC107;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: url('https://images.unsplash.com/photo-1569025690916-87d65b0f21c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* News Sections */
+        .section-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            color: #006A4E;
+            font-size: 32px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #006A4E;
+            border-radius: 2px;
+        }
+        
+        .news-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .news-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .news-card:hover .news-image img {
+            transform: scale(1.05);
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-source {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .news-source .source {
+            color: #006A4E;
+            font-weight: 600;
+        }
+        
+        .news-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .news-desc {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .read-more {
+            display: inline-block;
+            color: #006A4E;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        
+        /* Multimedia Section */
+        .multimedia {
+            background: #eef5f2;
+            padding: 40px 0;
+        }
+        
+        .media-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .media-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .media-content {
+            padding: 15px;
+        }
+        
+        .media-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        /* Footer */
+        footer {
+            background: #002f20;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #FFC107;
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+        
+        .footer-links a {
+            display: block;
+            color: #ddd;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #FFC107;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 10px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: #006A4E;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h2 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .news-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .update-notice {
+            text-align: center;
+            background: #e1f5fe;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 20px 0;
+            color: #006A4E;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-globe-asia logo-icon"></i>
+                <h1>BDN Bangladesh</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">হোম</a></li>
+                    <li><a href="#">জাতীয়</a></li>
+                    <li><a href="#">আন্তর্জাতিক</a></li>
+                    <li><a href="#">খেলা</a></li>
+                    <li><a href="#">বিনোদন</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>বাংলাদেশের সকল সংবাদ একত্রিত</h2>
+            <p>বাংলাদেশের শীর্ষ ৫০+ সংবাদপত্র থেকে সর্বশেষ খবর পাওয়ার জন্য আপনার নির্ভরযোগ্য মাধ্যম</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Update Notice -->
+        <div class="update-notice">
+            <i class="fas fa-sync-alt"></i> সংবাদগুলি স্বয়ংক্রিয়ভাবে ৩০ মিনিট পরপর হালনাগাদ করা হয়
+        </div>
+
+        <!-- Breaking News -->
+        <h2 class="section-title">ব্রেকিং নিউজ</h2>
+        <div class="news-container">
+            <div class="news-card">
+                <div class="news-image">
+                    <img src="https://images.prothomalo.com/prothomalo-bangla%2F2023-07%2F41b32d6a-7e6c-4b8c-bb1d-cc7d4e2d6d90%2FUntitled_1.jpg?auto=format%2Ccompress&fmt=webp&format=webp&w=640&dpr=1.0" alt="News Image">
+                </div>
+                <div class="news-content">
+                    <div class="news-source">
+                        <span class="source">প্রথম আলো</span>
+                        <span>১০ মিনিট আগে</span>
+                    </div>
+                    <h3 class="news-title">ঢাকায় দুই দিনের ভারী বৃষ্টির সম্ভাবনা</h3>
+                    <p class="news-desc">আবহাওয়া অধিদপ্তর জানিয়েছে, আগামী দুদিন ঢাকাসহ দেশের বিভিন্ন অঞ্চলে ভারী থেকে অতিভারী বৃষ্টি হতে পারে।</p>
+                    <a href="#" class="read-more">বিস্তারিত পড়ুন</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-image">
+                    <img src="https://images.jugantor.com/2023-07/7e8b4f2a-4e2b-4e7b-ba48-5b5a8c2d6e72/big_thumb_8a9a0d9d8e1c4e4d8a0d9d8e1c4e4d.jpg" alt="News Image">
+                </div>
+                <div class="news-content">
+                    <div class="news-source">
+                        <span class="source">যুগান্তর</span>
+                        <span>১৫ মিনিট আগে</span>
+                    </div>
+                    <h3 class="news-title">বাংলাদেশ-ভারত ক্রিকেট সিরিজ নিশ্চিত</h3>
+                    <p class="news-desc">অক্টোবরে বাংলাদেশে ভারত জাতীয় ক্রিকেট দলের আসন্ন সফর নিশ্চিত করেছে বাংলাদেশ ক্রিকেট বোর্ড (বিসিবি)।</p>
+                    <a href="#" class="read-more">বিস্তারিত পড়ুন</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-image">
+                    <img src="https://www.thedailystar.net/sites/default/files/styles/big_202/public/images/2023/07/15/economy.jpg" alt="News Image">
+                </div>
+                <div class="news-content">
+                    <div class="news-source">
+                        <span class="source">ডেইলি স্টার</span>
+                        <span>২০ মিনিট আগে</span>
+                    </div>
+                    <h3 class="news-title">রপ্তানি আয়ে নতুন রেকর্ড</h3>
+                    <p class="news-desc">গত财政年度ে বাংলাদেশের রপ্তানি আয় ৬০ বিলিয়ন ডলার ছাড়িয়েছে, যা একটি নতুন রেকর্ড।</p>
+                    <a href="#" class="read-more">বিস্তারিত পড়ুন</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- National News -->
+        <h2 class="section-title">জাতীয় সংবাদ</h2>
+        <div class="news-container">
+            <div class="news-card">
+                <div class="news-content">
+                    <div class="news-source">
+                        <span class="source">ইত্তেফাক</span>
+                        <span>২৫ মিনিট আগে</span>
+                    </div>
+                    <h3 class="news-title">প্রধানমন্ত্রীর নতুন মেগা প্রকল্প ঘোষণা</h3>
+                    <p class="news-desc">প্রধানমন্ত্রী শেখ হাসিনা দেশের দক্ষিণাঞ্চলের উন্নয়নে一个新的 মেগা প্রকল্প ঘোষণা করেছেন, যার ব্যয় ধরা হয়েছে ২৫,০০০ কোটি টাকা।</p>
+                    <a href="#" class="read-more">বিস্তারিত পড়ুন</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-content">
+                    <div class="news-source">
+                        <span class="source">নয়া দিগন্ত</span>
+                        <span>৩০ মিনিট আগে</span>
+                    </div>
+                    <h3 class="news-title">শিক্ষাখাতে বরাদ্দ বাড়ানোর দাবি</h3>
+                    <p class="news-desc">শিক্ষাবিদ ও বিশেষজ্ঞ们 অর্থবিলে শিক্ষাখাতে বরাদ্দ আরও増加 করার দাবি জানিয়েছেন।</p>
+                    <a href="#" class="read-more">বিস্তারিত পড়ুন</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-content">
+                    <div class="news-source">
+                        <span class="source">কালের কণ্ঠ</span>
+                        <span>৪০ মিনিট আগে</span>
+                    </div>
+                    <h3 class="news-title">মেট্রোরেলের দ্বিতীয় পর্যায়ের কাজ শুরু</h3>
+                    <p class="news-desc">ঢাকা মেট্রোরেলের দ্বিতীয় পর্যায়ের construction work正式开始 হয়েছে। এই পর্যায়ে উত্তরা থেকে কমলাপুর পর্যন্ত রেলপথ বিস্তৃত হবে।</p>
+                    <a href="#" class="read-more">বিস্তারিত পড়ুন</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Multimedia Section -->
+    <section class="multimedia">
+        <div class="container">
+            <h2 class="section-title">মাল্টিমিডিয়া</h2>
+            <div class="media-container">
+                <div class="media-card">
+                    <div class="news-image">
+                        <img src="https://i.ytimg.com/vi/5L4zB2a4X7k/maxresdefault.jpg" alt="Video Thumbnail">
+                    </div>
+                    <div class="media-content">
+                        <h3 class="media-title">পদ্মা সেতু: বাংলাদেশের উন্নয়নের একটি মাইলফলক</h3>
+                        <a href="#" class="read-more">ভিডিও দেখুন</a>
+                    </div>
+                </div>
+
+                <div class="media-card">
+                    <div class="news-image">
+                        <img src="https://images.prothomalo.com/prothomalo-bangla%2F2023-07%2Fc6b3b3a7-8e2f-4b3a-b9c5-5e5b5c5d5e5b%2Faudio_cover.jpg?auto=format%2Ccompress&fmt=webp&format=webp&w=640&dpr=1.0" alt="Audio Thumbnail">
+                    </div>
+                    <div class="media-content">
+                        <h3 class="media-title">বিশেষ সাক্ষাৎকার: অর্থমন্ত্রী আবুল মাল আবদুল মুহিত</h3>
+                        <a href="#" class="read-more">অডিও শুনুন</a>
+                    </div>
+                </div>
+
+                <div class="media-card">
+                    <div class="news-image">
+                        <img src="https://www.thedailystar.net/sites/default/files/styles/big_202/public/images/2023/07/15/gallery_1.jpg" alt="Gallery Thumbnail">
+                    </div>
+                    <div class="media-content">
+                        <h3 class="media-title">বাংলাদেশের প্রাকৃতিক সৌন্দর্য: একটি ফটোগ্যালারি</h3>
+                        <a href="#" class="read-more">ছবি দেখুন</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BDN Bangladesh</h3>
+                    <p>বাংলাদেশের সকল প্রধান সংবাদপত্র থেকে সংবাদ সংগ্রহ করে আপনাকে সরবরাহ করার জন্য আমরা প্রতিশ্রুতিবদ্ধ।</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>লিংক</h3>
+                    <div class="footer-links">
+                        <a href="#">হোম</a>
+                        <a href="#">জাতীয়</a>
+                        <a href="#">আন্তর্জাতিক</a>
+                        <a href="#">খেলা</a>
+                        <a href="#">বিনোদন</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>যোগাযোগ</h3>
+                    <p>ইমেইল: contact@bdn.com</p>
+                    <p>ফোন: +৮৮০ ১৭০০ ১২৩৪৫৬</p>
+                    <p>ঠিকানা: গুলশান, ঢাকা, বাংলাদেশ</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>সামাজিক মাধ্যম</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>কপিরাইট © ২০২৩ BDN Bangladesh। সকল права защищены।</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Function to update last update time
+        function updateLastRefreshTime() {
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true 
+            };
+            const updateTime = now.toLocaleDateString('bn-BD', options);
+            
+            // Create update notice if it doesn't exist
+            if (!document.getElementById('update-time')) {
+                const updateNotice = document.querySelector('.update-notice');
+                updateNotice.innerHTML += ` <span id="update-time">সর্বশেষ হালনাগাদ: ${updateTime}</span>`;
+            } else {
+                document.getElementById('update-time').textContent = `সর্বশেষ হালনাগাদ: ${updateTime}`;
+            }
+        }
+        
+        // Initial update
+        updateLastRefreshTime();
+        
+        // Simulate news update every 30 minutes (1800000 milliseconds)
+        // For demonstration, we'll update every 2 minutes (120000 milliseconds)
+        setInterval(function() {
+            // This would typically fetch new data from an API
+            // For now, we'll just update the time
+            updateLastRefreshTime();
+            
+            // Show update notification
+            const notification = document.createElement('div');
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = '#006A4E';
+            notification.style.color = 'white';
+            notification.style.padding = '10px 15px';
+            notification.style.borderRadius = '5px';
+            notification.style.zIndex = '1000';
+            notification.innerHTML = '<i class="fas fa-check-circle"></i> সংবাদগুলি হালনাগাদ করা হয়েছে';
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(function() {
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.5s';
+                setTimeout(function() {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
+        }, 120000); // 2 minutes for demonstration
+    </script>
+</body>
+</html>
