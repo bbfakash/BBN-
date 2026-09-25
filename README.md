@@ -6,10 +6,7 @@ Get the latest news on politics, economy, education, technology, sports, and ent
 BBN Banner
 
 🔴 Live Demo
-👉 https://bbn-news.vercel.app (তোমার লাইভ লিংক এখানে বসাবে)
-
-✨ Features
-⚡ Real-time news updates from various Bangladeshi sources
+👉 https://bbn-news.vercel.peatFeat app ureseal-time news updates from various Bangladeshi sources
 🗂️ Category wise: Politics, Economy, Tech, Sports, Entertainment
 📱 Fully Responsive - Mobile, Tablet, Desktop
 🌙 Clean & Fast UI
